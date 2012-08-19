@@ -1,5 +1,6 @@
 package com.zlab.htcisocontrol;
 
+import java.io.IOException;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -32,6 +33,7 @@ public class Main_screen extends Activity {
         	Intent fileChooserActivity = new Intent(this, FileChooser.class);
         	startActivityForResult(fileChooserActivity, PICK_ISO_REQUEST);
         	//filepickerthread();
+        	break;
         }
     }
     
@@ -44,9 +46,17 @@ public class Main_screen extends Activity {
                 String path = data.getStringExtra("path");
                 t = (TextView) findViewById(R.id.textView2);
             	t.setText(path);
-            }
-        }
+            	
+            	try {
+					Runtime.getRuntime().exec("mount -o rw,remount /system");
+					Runtime.getRuntime().exec("rm " +"/system/etc/PCTOOL.ISO");
+					Runtime.getRuntime().exec("ln -s " +path +" /system/etc/PCTOOL.ISO");
+					Runtime.getRuntime().exec("mount -o ro,remount /system");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
     }
-    
-    
+    }
+    }
 }

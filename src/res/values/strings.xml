@@ -5,11 +5,10 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main_screen">ISO control</string>
     <string name="firstitemtext">WARNING: this may brick you phone!!!</string>
-    <string name="firstbuttontext">1. Select ISO file</string>
+    <string name="firstbuttontext">Select ISO file</string>
     <string name="fileis">Current file is:</string>
-    <string name="filepath">PCTOOLS.ISO</string>
-    <string name="mountbutton">2. Mount new ISO</string>
-    <string name="aftermount">After mount new ISO, reconnect USB cable please!</string>
+    <string name="filepath"></string>
+    <string name="aftermount">After select ISO, reconnect USB cable and select &quot;HTC Sync Manager&quot;!</string>
     <string name="done">DONE!</string>
     <string name="dobackup">Backup stock ISO!</string>
     <string name="restorebackup">Restore stock ISO!</string>
