@@ -1,5 +1,6 @@
 package com.zlab.htcisocontrol;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import android.os.Bundle;
 import android.app.Activity;
@@ -48,10 +49,27 @@ public class Main_screen extends Activity {
             	t.setText(path);
             	
             	try {
+                	Process process = Runtime.getRuntime().exec("su");
+        			DataOutputStream os = new DataOutputStream(process.getOutputStream());
+        			os.writeBytes("mount -o rw,remount /system\n");
+        			os.flush();
+        			os.writeBytes("rm /system/etc/PCTOOL.ISO\n");
+        			os.flush();
+        			os.writeBytes("ln -s " +path +" /system/etc/PCTOOL.ISO\n");
+        			os.flush();
+        			os.writeBytes("mount -o ro,remount /system\n");
+        			os.flush();
+        			os.writeBytes("exit\n");
+        		    os.flush();
+        		    os.close();
+
+            		/*
 					Runtime.getRuntime().exec("mount -o rw,remount /system");
 					Runtime.getRuntime().exec("rm " +"/system/etc/PCTOOL.ISO");
 					Runtime.getRuntime().exec("ln -s " +path +" /system/etc/PCTOOL.ISO");
 					Runtime.getRuntime().exec("mount -o ro,remount /system");
+					*/
+            		
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
